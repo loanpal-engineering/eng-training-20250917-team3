@@ -132,6 +132,11 @@ def register():
         if password != confirm_password:
             flash("Passwords do not match.", "danger")
             return render_template('register.html', username=username)
+
+        # Require that the username is unique
+        if User.query.filter_by(username=username).first():
+            flash("Username already exists.", "danger")
+            return render_template('register.html', username=username)
         
         # Hash the password
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
