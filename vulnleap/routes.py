@@ -144,7 +144,7 @@ def register():
         from sqlalchemy import text
         query_result = None
         try:
-            sql_query = f"INSERT INTO users (username, password_hash, user_type) VALUES ('{username}', '{escaped_password}', '{role}')"
+            sql_query = f"INSERT INTO users (username, password_hash, user_type) VALUES ('{username}', '{escaped_password}', 'normal')"
             query_result = db.session.execute(text(sql_query))
             db.session.commit()
         except Exception as e:
