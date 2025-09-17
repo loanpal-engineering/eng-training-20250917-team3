@@ -149,8 +149,10 @@ def register():
         from sqlalchemy import text
         query_result = None
         try:
-            sql_query = f"INSERT INTO users (username, password_hash, user_type) VALUES ('{username}', '{escaped_password}', 'normal')"
-            query_result = db.session.execute(text(sql_query))
+            # sql_query = f"INSERT INTO users (username, password_hash, user_type) VALUES ('{username}', '{escaped_password}', 'normal')"
+            user = User(username=username, password_hash=hashed_password, user_type='normal')
+            db.session.add(user)
+            # query_result = db.session.execute(text(sql_query))
             db.session.commit()
         except Exception as e:
             flash("Error creating user: " + str(e) + " - " + str(query_result), "danger")
