@@ -324,6 +324,11 @@ def orgadmin():
     if request.method == 'POST':
         # Check if this is a new user creation or a setting change
         if 'username' in request.form:
+            # Check to make sure the username is unique
+            if User.query.filter_by(username=request.form['username']).first():
+                flash("Username already exists.", "danger")
+                return redirect(url_for('main.orgadmin'))
+            
             # New user creation
             username = request.form['username']
             password = request.form['password']
