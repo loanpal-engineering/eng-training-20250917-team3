@@ -254,10 +254,17 @@ def quote_page(quote_id):
     if not user:
         flash("User not found.", "danger")
 
+    # Grab the quote from the database
     quote = MortgageQuote.query.get(quote_id)
     if not quote:
         flash("Quote not found.", "danger")
         return redirect(url_for('main.user'))
+
+    # Check to make sure the user is the owner of the quote
+    if quote.user_id != user.id:
+        flash("You do not have access to this quote.", "danger")
+        return redirect(url_for('main.user'))
+
     return render_template('existing_quote.html', quote=quote)
 
 @main.route('/admin')
