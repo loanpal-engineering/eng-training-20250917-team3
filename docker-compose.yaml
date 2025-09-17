@@ -17,7 +17,7 @@ services:
   db_instance:
     image: mariadb:10.5
     environment:
-      - MYSQL_ROOT_PASSWORD=supersecretpassword
+      - MYSQL_ROOT_PASSWORD=3b28ed4a-ceb3-4242-9665-6cd674874397
       - MYSQL_USER=user
       - MYSQL_PASSWORD=d711017f-f487-4efb-869b-04fbca430187
       - MYSQL_DATABASE=webappdb
